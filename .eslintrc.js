@@ -24,6 +24,7 @@ module.exports = {
   },
   rules: {
     'prettier/prettier': ['error', prettierOptions],
+    'array-element-newline': [2, 'consistent'],
     'arrow-body-style': [2, 'as-needed'],
     'class-methods-use-this': 0,
     'comma-dangle': [2, 'always-multiline'],
