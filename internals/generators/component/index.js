@@ -40,7 +40,7 @@ module.exports = {
     {
       type: 'confirm',
       name: 'wantMessages',
-      default: true,
+      default: false,
       message: 'Do you want i18n messages (i.e. will this component use text)?',
     },
     {
@@ -71,12 +71,12 @@ module.exports = {
         templateFile: componentTemplate,
         abortOnFail: true,
       },
-      {
-        type: 'add',
-        path: '../../app/components/{{properCase name}}/tests/index.test.js',
-        templateFile: './component/test.js.hbs',
-        abortOnFail: true,
-      },
+      // {
+      //   type: 'add',
+      //   path: '../../app/components/{{properCase name}}/tests/index.test.js',
+      //   templateFile: './component/test.js.hbs',
+      //   abortOnFail: true,
+      // },
     ];
 
     // If they want a i18n messages file

@@ -5,13 +5,13 @@
  */
 
 import React from 'react';
-// import PropTypes from 'prop-types';
-// import styled from 'styled-components';
-
+import PropTypes from 'prop-types';
 {{#if wantMessages}}
 import { FormattedMessage } from 'react-intl';
+
 import messages from './messages';
 {{/if}}
+// import styles from './styles.scss';
 
 /* eslint-disable react/prefer-stateless-function */
 class {{ properCase name }} extends {{{ type }}} {
@@ -26,6 +26,8 @@ class {{ properCase name }} extends {{{ type }}} {
   }
 }
 
-{{ properCase name }}.propTypes = {};
+{{ properCase name }}.propTypes = {
+  // children: PropTypes.element.isRequired,
+};
 
 export default {{ properCase name }};

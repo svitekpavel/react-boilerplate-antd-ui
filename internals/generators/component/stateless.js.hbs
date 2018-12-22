@@ -6,12 +6,12 @@
 
 import React from 'react';
 // import PropTypes from 'prop-types';
-// import styled from 'styled-components';
-
 {{#if wantMessages}}
 import { FormattedMessage } from 'react-intl';
+
 import messages from './messages';
 {{/if}}
+// import styles from './styles.scss';
 
 function {{ properCase name }}() {
   return (
@@ -23,6 +23,8 @@ function {{ properCase name }}() {
   );
 }
 
-{{ properCase name }}.propTypes = {};
+{{ properCase name }}.propTypes = {
+  // children: PropTypes.element.isRequired,
+};
 
 export default {{ properCase name }};
