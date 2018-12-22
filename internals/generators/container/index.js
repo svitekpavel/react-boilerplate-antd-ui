@@ -12,11 +12,7 @@ module.exports = {
       name: 'type',
       message: 'Select the base component type:',
       default: 'Stateless Function',
-      choices: () => [
-        'Stateless Function',
-        'React.PureComponent',
-        'React.Component',
-      ],
+      choices: () => ['Stateless Function', 'React.PureComponent', 'React.Component'],
     },
     {
       type: 'input',
@@ -35,6 +31,12 @@ module.exports = {
     },
     {
       type: 'confirm',
+      name: 'wantTests',
+      default: false,
+      message: 'Do you want tests?',
+    },
+    {
+      type: 'confirm',
       name: 'wantHeaders',
       default: false,
       message: 'Do you want headers?',
@@ -43,8 +45,7 @@ module.exports = {
       type: 'confirm',
       name: 'wantActionsAndReducer',
       default: true,
-      message:
-        'Do you want an actions/constants/selectors/reducer tuple for this container?',
+      message: 'Do you want an actions/constants/selectors/reducer tuple for this container?',
     },
     {
       type: 'confirm',
@@ -86,13 +87,16 @@ module.exports = {
         templateFile: componentTemplate,
         abortOnFail: true,
       },
-      {
+    ];
+
+    if (data.wantTests) {
+      actions.push({
         type: 'add',
         path: '../../app/containers/{{properCase name}}/tests/index.test.js',
         templateFile: './container/test.js.hbs',
         abortOnFail: true,
-      },
-    ];
+      });
+    }
 
     // If component wants messages
     if (data.wantMessages) {
@@ -114,12 +118,6 @@ module.exports = {
         templateFile: './container/actions.js.hbs',
         abortOnFail: true,
       });
-      actions.push({
-        type: 'add',
-        path: '../../app/containers/{{properCase name}}/tests/actions.test.js',
-        templateFile: './container/actions.test.js.hbs',
-        abortOnFail: true,
-      });
 
       // Constants
       actions.push({
@@ -136,13 +134,6 @@ module.exports = {
         templateFile: './container/selectors.js.hbs',
         abortOnFail: true,
       });
-      actions.push({
-        type: 'add',
-        path:
-          '../../app/containers/{{properCase name}}/tests/selectors.test.js',
-        templateFile: './container/selectors.test.js.hbs',
-        abortOnFail: true,
-      });
 
       // Reducer
       actions.push({
@@ -151,12 +142,30 @@ module.exports = {
         templateFile: './container/reducer.js.hbs',
         abortOnFail: true,
       });
-      actions.push({
-        type: 'add',
-        path: '../../app/containers/{{properCase name}}/tests/reducer.test.js',
-        templateFile: './container/reducer.test.js.hbs',
-        abortOnFail: true,
-      });
+
+      // Tests
+      if (data.wantTests) {
+        actions.push({
+          type: 'add',
+          path: '../../app/containers/{{properCase name}}/tests/actions.test.js',
+          templateFile: './container/actions.test.js.hbs',
+          abortOnFail: true,
+        });
+
+        actions.push({
+          type: 'add',
+          path: '../../app/containers/{{properCase name}}/tests/selectors.test.js',
+          templateFile: './container/selectors.test.js.hbs',
+          abortOnFail: true,
+        });
+
+        actions.push({
+          type: 'add',
+          path: '../../app/containers/{{properCase name}}/tests/reducer.test.js',
+          templateFile: './container/reducer.test.js.hbs',
+          abortOnFail: true,
+        });
+      }
     }
 
     // Sagas
@@ -167,12 +176,15 @@ module.exports = {
         templateFile: './container/saga.js.hbs',
         abortOnFail: true,
       });
-      actions.push({
-        type: 'add',
-        path: '../../app/containers/{{properCase name}}/tests/saga.test.js',
-        templateFile: './container/saga.test.js.hbs',
-        abortOnFail: true,
-      });
+
+      if (data.wantTests) {
+        actions.push({
+          type: 'add',
+          path: '../../app/containers/{{properCase name}}/tests/saga.test.js',
+          templateFile: './container/saga.test.js.hbs',
+          abortOnFail: true,
+        });
+      }
     }
 
     if (data.wantLoadable) {
