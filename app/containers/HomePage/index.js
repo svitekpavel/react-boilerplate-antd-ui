@@ -11,14 +11,11 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
+import { Button } from 'antd';
 
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
-import {
-  makeSelectRepos,
-  makeSelectLoading,
-  makeSelectError,
-} from 'containers/App/selectors';
+import { makeSelectRepos, makeSelectLoading, makeSelectError } from 'containers/App/selectors';
 import H2 from 'components/H2';
 import ReposList from 'components/ReposList';
 import AtPrefix from './AtPrefix';
@@ -56,10 +53,7 @@ export class HomePage extends React.PureComponent {
       <article>
         <Helmet>
           <title>Home Page</title>
-          <meta
-            name="description"
-            content="A React.js Boilerplate application homepage"
-          />
+          <meta name="description" content="A React.js Boilerplate application homepage" />
         </Helmet>
         <div>
           <CenteredSection>
@@ -87,6 +81,7 @@ export class HomePage extends React.PureComponent {
                   value={this.props.username}
                   onChange={this.props.onChangeUsername}
                 />
+                <Button type="primary">Submit</Button>
               </label>
             </Form>
             <ReposList {...reposListProps} />
