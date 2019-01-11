@@ -81,7 +81,7 @@ export class HomePage extends React.PureComponent {
                   value={this.props.username}
                   onChange={this.props.onChangeUsername}
                 />
-                <Button type="primary">Submit</Button>
+                <Button type="secondary">Submit</Button>
               </label>
             </Form>
             <ReposList {...reposListProps} />
